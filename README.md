@@ -27,3 +27,8 @@ chmod +x /usr/local/bin/deema
 ## Использование
 
 Просто выполните команду `deema`, чтобы ознакомиться с краткой исторической справкой.
+
+## TODO
+
+- [ ] make/m из пресетов на files.deema.help
+- [ ] integrate/i angular/ng (с автоустановкой и настройкой `dc-api-client`
