@@ -27,17 +27,19 @@ void help() {
     cout << "deema gen/g controller/c <ControllerName> [--ws]" << endl;
     cout << "deema gen/g validator/v <ValidatorName>" << endl;
     cout << "deema gen/g project/p <ProjectName> [--typescript, --ts, --here, --install]" << endl;
-    cout << "deema make/m <PresetName> [Available presets: auth]" << endl << endl;
+    cout << "deema serve" << endl << endl;
 
     cout << "GitHub: https://github.com/mayerdev/deema" << endl;
     cout << "Docs: https://deema.help" << endl;
+
+    // todo: show current cli version
 }
 
 int main(int argc, char* argv[]) {
     ArgsParser args(argc, argv);
 
     vector<string> vec = args.getVector();
-    if(vec.size() < 2) {
+    if(vec.size() < 1) {
         help();
         return 0;
     }
@@ -176,7 +178,15 @@ int main(int argc, char* argv[]) {
 
             cout << "Created project: " << vec[2] << endl;
         }
-    }
+    } else if(vec[0] == "serve") {
+        cout << "Starting dev server..." << endl;
+
+        // todo: nodejs version check
+        // todo: check if node_modules is installed
+
+        string cmd = "node node_modules/.bin/dc-api-core --dev";
+        system(cmd.c_str());
+    } else help();
 
     return 0;
 }

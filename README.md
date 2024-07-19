@@ -32,3 +32,4 @@ chmod +x /usr/local/bin/deema
 
 - [ ] make/m из пресетов на files.deema.help
 - [ ] integrate/i angular/ng (с автоустановкой и настройкой `dc-api-client`
+- [ ] start для быстрого запуска бекенда в фоне, для продакшна
