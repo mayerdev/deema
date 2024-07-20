@@ -17,7 +17,10 @@ chmod +x /usr/local/bin/deema
 
 ### Linux
 
-Нет скомпилированной версии, но можно собрать.
+```bash
+curl -o /usr/local/bin/deema https://files.deema.help/bin/deema-linux
+chmod +x /usr/local/bin/deema
+```
 
 ### Windows
 
