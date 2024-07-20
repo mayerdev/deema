@@ -3,12 +3,14 @@
 #include <nlohmann/json.hpp>
 #include <filesystem>
 #include <httplib.h>
+#include <regex>
 #include "args.h"
 
 using namespace std;
 using json = nlohmann::json;
 
 string repo = "http://files.deema.help";
+string version = "0.0.3";
 
 string str_replace(string source, string find, string replace) {
     size_t pos = 0;
@@ -30,9 +32,9 @@ void help() {
     cout << "deema serve" << endl << endl;
 
     cout << "GitHub: https://github.com/mayerdev/deema" << endl;
-    cout << "Docs: https://deema.help" << endl;
+    cout << "Docs: https://deema.help" << endl << endl;
 
-    // todo: show current cli version
+    cout << "Version: v" << version << endl;
 }
 
 int main(int argc, char* argv[]) {
@@ -181,8 +183,26 @@ int main(int argc, char* argv[]) {
     } else if(vec[0] == "serve") {
         cout << "Starting dev server..." << endl;
 
-        // todo: nodejs version check
+        // todo: check if node > version 14 && node < version 18 exists
         // todo: check if node_modules is installed
+
+        string v_cmd = "node --version";
+        
+        auto result = system(v_cmd.c_str());
+
+        regex r("v(1[5-9])\\.");
+        smatch match;
+        if (regex_search(result, match, r)) {
+            cout << "Node version: " << match[1] << endl;
+        } else {
+            cout << "ERROR: Node version not supported" << endl;
+            return 1;
+        }
+
+        if (filesystem::exists("node_modules") != 0) {
+            cout << "ERROR: node_modules not installed" << endl;
+            return 1;
+        }
 
         string cmd = "node node_modules/.bin/dc-api-core --dev";
         system(cmd.c_str());
